@@ -1,14 +1,21 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  darkMode: ["class"],
+const config = {
+	darkMode: "class",
 	content: [
 		"./src/**/*.{js,jsx,ts,tsx}",
-		"app/**/*.{ts,tsx}",
-		"components/**/*.{ts,tsx}",
+		"./components/**/*.{ts,tsx}",
+		"./app/**/*.{ts,tsx}",
 	],
 	theme: {
 		extend: {
 			colors: {
+				kanban: {
+					"not-started": "#1e2330",
+					ready: "#2a2d3d",
+					"in-progress": "#2d2544",
+					blocked: "#3d2d2d",
+					done: "#2d3d35",
+					cancelled: "#3d3d3d",
+				},
 				border: "hsl(var(--border))",
 				input: "hsl(var(--input))",
 				ring: "hsl(var(--ring))",
@@ -43,6 +50,12 @@ module.exports = {
 					foreground: "hsl(var(--card-foreground))",
 				},
 			},
+			backgroundColor: {
+				card: "rgba(255, 255, 255, 0.05)",
+			},
+			backdropFilter: {
+				card: "blur(10px)",
+			},
 			borderRadius: {
 				lg: `var(--radius)`,
 				md: `calc(var(--radius) - 2px)`,
@@ -52,3 +65,5 @@ module.exports = {
 	},
 	plugins: [require("tailwindcss-animate")],
 };
+
+export default config;
