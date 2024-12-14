@@ -1,4 +1,4 @@
-import { Position, Candidate } from './types';
+import { Position, Candidate } from '../../../types';
 
 export const mockPosition: Position = {
   positionName: "Senior backend engineer",

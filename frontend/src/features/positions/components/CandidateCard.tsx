@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useDrag } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
-import { Candidate } from './types';
+import { Candidate } from '../types';
 
 interface CandidateCardProps {
   candidate: Candidate;

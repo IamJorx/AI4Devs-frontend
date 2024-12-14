@@ -2,7 +2,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDrop } from 'react-dnd';
 import { CandidateCard } from './CandidateCard';
-import { Candidate, InterviewStep } from './types';
+import { Candidate, InterviewStep } from '../types';
 
 interface ColumnProps {
   step: InterviewStep;
