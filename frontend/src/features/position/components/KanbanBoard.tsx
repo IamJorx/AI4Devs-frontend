@@ -15,7 +15,7 @@ interface KanbanBoardProps {
 const DndBackend = ('ontouchstart' in window || navigator.maxTouchPoints) ? TouchBackend : HTML5Backend;
 
 export const KanbanBoard: React.FC<KanbanBoardProps> = ({ positionId }) => {
-  const { position, candidates, loading, error } = usePositionData(positionId);
+  const { position, candidates, loading, error, updateStage } = usePositionData(positionId);
   const [localCandidates, setLocalCandidates] = useState<Candidate[]>([]);
   const [isDark, setIsDark] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -59,20 +59,35 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({ positionId }) => {
     );
   }
 
-  const handleCandidateDrop = (candidateId: number, newStep: string) => {
-    setLocalCandidates((prevCandidates) =>
-      prevCandidates.map((candidate) => {
-        if (candidate.id === candidateId) {
-          const newScore = Math.min(5, Math.max(0, candidate.averageScore + (Math.random() - 0.5)));
-          return { 
-            ...candidate, 
-            currentInterviewStep: newStep,
-            averageScore: Number(newScore.toFixed(1))
-          };
-        }
-        return candidate;
-      })
-    );
+  const handleCandidateDrop = async (candidateId: number, newStep: string) => {
+    console.log('🚀 ~ handleCandidateDrop ~ newStep:', newStep)
+    const previousCandidates = [...localCandidates];
+    
+    try {
+      // Optimistic update
+      setLocalCandidates((prevCandidates) =>
+        prevCandidates.map((candidate) => {
+          if (candidate.id === candidateId) {
+            return { 
+              ...candidate, 
+              currentInterviewStep: newStep
+            };
+          }
+          return candidate;
+        })
+      );
+
+      // Call API
+      await updateStage(
+        candidateId,
+        positionId,
+        +newStep
+      );
+    } catch (error) {
+      // Revert on error
+      setLocalCandidates(previousCandidates);
+      console.error('Error updating candidate stage:', error);
+    }
   };
 
   const toggleTheme = () => {
@@ -118,7 +133,7 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({ positionId }) => {
                   key={step.id}
                   step={step}
                   candidates={localCandidates}
-                  onCandidateDrop={handleCandidateDrop}
+                  onCandidateDrop={candidateId => handleCandidateDrop(candidateId, ''+step.id)}
                 />
               ))}
           </div>
