@@ -42,16 +42,16 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({ candidate }) => {
       transition={{ duration: 0.2 }}
       className={`
         p-4 mb-4 rounded-xl
-        bg-white dark:bg-card dark:backdrop-blur-sm
-        border border-gray-200 dark:border-gray-700/50
-        transition-all duration-200
-        hover:border-gray-300 dark:hover:border-gray-600
-        shadow-sm hover:shadow-md
+        bg-slate-50 dark:bg-slate-800
+        border border-slate-200 dark:border-slate-700
+        transition-colors duration-200 ease-in-out
+        hover:border-slate-300 dark:hover:border-slate-600
+        shadow-sm hover:shadow-md dark:shadow-slate-900/30
         cursor-move
         ${isDragging ? 'opacity-0' : ''}
       `}
     >
-      <h3 className="text-base font-medium text-gray-900 dark:text-gray-100 mb-2">
+      <h3 className="text-base font-medium text-gray-900 dark:text-gray-50 mb-2">
         {candidate.fullName}
       </h3>
       

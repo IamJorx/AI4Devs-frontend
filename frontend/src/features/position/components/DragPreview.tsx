@@ -23,11 +23,10 @@ export const DragPreview: React.FC = () => {
         zIndex: 100,
         left: currentOffset.x,
         top: currentOffset.y,
-        transform: 'translate(-50%, -50%)',
       }}
-      className="p-4 rounded-xl bg-white dark:bg-gray-800 shadow-lg border-2 border-blue-500 w-[300px]"
+      className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 shadow-lg border border-slate-200 dark:border-slate-700 w-[300px]"
     >
-      <h3 className="text-base font-medium text-gray-900 dark:text-gray-100 mb-2">
+      <h3 className="text-base font-medium text-gray-900 dark:text-gray-50 mb-2">
         {candidate.fullName}
       </h3>
       <div className="flex items-center justify-end">
