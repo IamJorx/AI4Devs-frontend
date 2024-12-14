@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Position, Candidate } from './types';
-import { mockPosition, mockCandidates } from './mockData';
+import { Position, Candidate } from '../types';
+import { mockPosition, mockCandidates } from '../mockData';
 
 export const usePositionData = (positionId: number) => {
   const [position, setPosition] = useState<Position | null>(null);

@@ -3,8 +3,8 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TouchBackend } from 'react-dnd-touch-backend';
 import { Column } from './Column';
-import { usePositionData } from './usePositionData';
-import { Candidate } from './types';
+import { usePositionData } from '../hooks/usePositionData';
+import { Candidate, InterviewStep } from '../types';
 import { Sun, Moon, ArrowLeft } from 'lucide-react';
 import { DragPreview } from './DragPreview';
 
@@ -112,8 +112,8 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({ positionId }) => {
 
           <div className="flex flex-col md:flex-row gap-6 overflow-x-auto pb-6">
             {position.interviewFlow.interviewSteps
-              .sort((a, b) => a.orderIndex - b.orderIndex)
-              .map((step) => (
+              .sort((a: { orderIndex: number; }, b: { orderIndex: number; }) => a.orderIndex - b.orderIndex)
+              .map((step: InterviewStep) => (
                 <Column
                   key={step.id}
                   step={step}

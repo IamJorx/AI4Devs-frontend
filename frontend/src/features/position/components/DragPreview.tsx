@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDragLayer } from 'react-dnd';
-import { Candidate } from './types';
+import { Candidate } from '../types';
 
 export const DragPreview: React.FC = () => {
   const { isDragging, item, currentOffset } = useDragLayer((monitor) => ({
